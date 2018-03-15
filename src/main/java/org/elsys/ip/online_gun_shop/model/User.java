@@ -1,14 +1,12 @@
 package org.elsys.ip.online_gun_shop.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
-import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends AbstractTimestamp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +28,11 @@ public class User {
     @Column(name = "is_admin", nullable = false)
     private Boolean isAdmin;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false)
-    private Calendar createdAt;
+    private List<Favourites> favourites;
 
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", nullable = false)
-    private Calendar updatedAt;
+    private List<Reviews> reviews;
+
+    private List<Purchases> purchases;
 
     public int getId() {
         return id;
@@ -88,24 +82,45 @@ public class User {
         isAdmin = admin;
     }
 
-    public Calendar getCreatedAt() {
-        return createdAt;
+    @OneToMany(mappedBy = "user")
+    public List<Favourites> getFavourites() {
+        return favourites;
     }
 
-    public Calendar getUpdatedAt() {
-        return updatedAt;
+    public void setFavourites(List<Favourites> favourites) {
+        this.favourites = favourites;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public List<Reviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Reviews> reviews) {
+        this.reviews = reviews;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public List<Purchases> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchases> purchases) {
+        this.purchases = purchases;
     }
 
     public User(String firstName, String lastName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+
+        this.favourites = new LinkedList<Favourites>();
+        this.reviews = new LinkedList<Reviews>();
+        this.purchases = new LinkedList<Purchases>();
     }
 
     public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this(firstName, lastName, password);
         this.email = email;
-        this.password = password;
     }
 }
