@@ -19,19 +19,22 @@ public class User extends AbstractTimestamp {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "is_admin", nullable = false)
-    private Boolean isAdmin;
+//    @Column(name = "is_admin", nullable = false)
+//    private Boolean isAdmin;
 
+    @OneToMany(mappedBy = "user")
     private List<Favourites> favourites;
 
+    @OneToMany(mappedBy = "user")
     private List<Reviews> reviews;
 
+    @OneToMany(mappedBy = "user")
     private List<Purchases> purchases;
 
     public int getId() {
@@ -58,12 +61,12 @@ public class User extends AbstractTimestamp {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -73,16 +76,15 @@ public class User extends AbstractTimestamp {
     public void setPassword(String password) {
         this.password = password;
     }
+//
+//    public Boolean getAdmin() {
+//        return isAdmin;
+//    }
+//
+//    public void setAdmin(Boolean admin) {
+//        isAdmin = admin;
+//    }
 
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
-    }
-
-    @OneToMany(mappedBy = "user")
     public List<Favourites> getFavourites() {
         return favourites;
     }
@@ -91,7 +93,6 @@ public class User extends AbstractTimestamp {
         this.favourites = favourites;
     }
 
-    @OneToMany(mappedBy = "user")
     public List<Reviews> getReviews() {
         return reviews;
     }
@@ -100,7 +101,6 @@ public class User extends AbstractTimestamp {
         this.reviews = reviews;
     }
 
-    @OneToMany(mappedBy = "user")
     public List<Purchases> getPurchases() {
         return purchases;
     }
@@ -109,18 +109,16 @@ public class User extends AbstractTimestamp {
         this.purchases = purchases;
     }
 
-    public User(String firstName, String lastName, String password) {
+    public User() {}
+
+    public User(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.password = password;
 
         this.favourites = new LinkedList<Favourites>();
         this.reviews = new LinkedList<Reviews>();
         this.purchases = new LinkedList<Purchases>();
-    }
-
-    public User(String firstName, String lastName, String email, String password) {
-        this(firstName, lastName, password);
-        this.email = email;
     }
 }

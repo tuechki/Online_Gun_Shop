@@ -10,7 +10,7 @@ import javax.persistence.TemporalType;
 import java.util.Calendar;
 
 @MappedSuperclass
-public class AbstractTimestamp {
+public abstract class AbstractTimestamp {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false)
