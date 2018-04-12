@@ -2,6 +2,8 @@ package org.elsys.ip.online_gun_shop.model;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "purchase_history")
 public class PurchaseHistory {
     //Redundant class - see Purchases
 
@@ -10,8 +12,12 @@ public class PurchaseHistory {
     @Column(name = "id")
     private int id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "weapon_id")
     private Weapon weapon;
 
     @Column(name = "quantity", nullable = false)
@@ -25,8 +31,6 @@ public class PurchaseHistory {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -35,8 +39,6 @@ public class PurchaseHistory {
         this.user = user;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "weapon_id")
     public Weapon getWeapon() {
         return weapon;
     }

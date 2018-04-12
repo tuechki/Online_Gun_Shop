@@ -10,8 +10,12 @@ public class Purchases extends AbstractTimestamp {
     @Column(name = "id")
     private int id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "weapon_id")
     private Weapon weapon;
 
     @Column(name = "quantity", nullable = false)
@@ -25,8 +29,6 @@ public class Purchases extends AbstractTimestamp {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -35,8 +37,6 @@ public class Purchases extends AbstractTimestamp {
         this.user = user;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "weapon_id")
     public Weapon getWeapon() {
         return weapon;
     }

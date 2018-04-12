@@ -43,10 +43,13 @@ public class Weapon extends AbstractTimestamp {
     @Column(name = "price", nullable = false, precision = 12, scale = 2)
     private Double price;
 
+    @OneToMany(mappedBy = "weapon")
     private List<Favourites> favourites;
 
+    @OneToMany(mappedBy = "weapon")
     private List<Reviews> reviews;
 
+    @OneToMany(mappedBy = "weapon")
     private List<Purchases> purchases;
 
     public int getId() {
@@ -137,7 +140,6 @@ public class Weapon extends AbstractTimestamp {
         this.price = price;
     }
 
-    @OneToMany(mappedBy = "weapon")
     public List<Favourites> getFavourites() {
         return favourites;
     }
@@ -146,7 +148,6 @@ public class Weapon extends AbstractTimestamp {
         this.favourites = favourites;
     }
 
-    @OneToMany(mappedBy = "weapon")
     public List<Reviews> getReviews() {
         return reviews;
     }
@@ -155,7 +156,6 @@ public class Weapon extends AbstractTimestamp {
         this.reviews = reviews;
     }
 
-    @OneToMany(mappedBy = "weapon")
     public List<Purchases> getPurchases() {
         return purchases;
     }
