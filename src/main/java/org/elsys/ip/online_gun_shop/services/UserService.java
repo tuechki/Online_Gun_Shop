@@ -1,23 +1,29 @@
 package org.elsys.ip.online_gun_shop.services;
 
 import org.elsys.ip.online_gun_shop.exception.ResourceNotFoundException;
+import org.elsys.ip.online_gun_shop.model.Favourites;
+import org.elsys.ip.online_gun_shop.model.Reviews;
 import org.elsys.ip.online_gun_shop.model.User;
 import org.elsys.ip.online_gun_shop.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    }
+
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
     }
 
     public User createUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);
     }
 
@@ -27,19 +33,20 @@ public class UserService {
     }
 
     public User updateUser(Integer id, User user) throws ResourceNotFoundException {
-        User requestedUser = this.userRepository.findById(id)
-                                 .orElseThrow(() -> new ResourceNotFoundException("User with id = "
-                                         + String.valueOf(id) + "not found"));
+        User foundUser = getUserById(id);
 
-        return this.userRepository.save(generateUpdatedUser(requestedUser));
+        return this.userRepository.save(ServiceUtil.updateFields(user, foundUser));
     }
 
     public void deleteUserById(Integer id) {
         this.userRepository.deleteById(id);
     }
 
-    private User generateUpdatedUser(User requestedUser) {
-        return new User(requestedUser.getFirstName(), requestedUser.getLastName(),
-                        requestedUser.getUsername(), requestedUser.getPassword());
+    public List<Favourites> getAllFavourites(Integer id) {
+        return getUserById(id).getFavourites();
+    }
+
+    public List<Reviews> getAllReviews(Integer id) {
+        return getUserById(id).getReviews();
     }
 }
