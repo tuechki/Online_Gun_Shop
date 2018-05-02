@@ -1,6 +1,8 @@
 package org.elsys.ip.online_gun_shop.services;
 
 import org.elsys.ip.online_gun_shop.exception.ResourceNotFoundException;
+import org.elsys.ip.online_gun_shop.model.Favourites;
+import org.elsys.ip.online_gun_shop.model.Reviews;
 import org.elsys.ip.online_gun_shop.model.User;
 import org.elsys.ip.online_gun_shop.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,5 +40,13 @@ public class UserService {
 
     public void deleteUserById(Integer id) {
         this.userRepository.deleteById(id);
+    }
+
+    public List<Favourites> getAllFavourites(Integer id) {
+        return getUserById(id).getFavourites();
+    }
+
+    public List<Reviews> getAllReviews(Integer id) {
+        return getUserById(id).getReviews();
     }
 }
