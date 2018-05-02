@@ -15,9 +15,4 @@ public class OnlineGunShopProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineGunShopProjectApplication.class, args);
 	}
-
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 }

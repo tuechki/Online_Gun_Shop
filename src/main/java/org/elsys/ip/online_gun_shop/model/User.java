@@ -19,14 +19,14 @@ public class User extends AbstractTimestamp {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "username", nullable = false)
-    private String username;
-
     @Column(name = "password", nullable = false)
     private String password;
 
-//    @Column(name = "is_admin", nullable = false)
-//    private Boolean isAdmin;
+    @Column(name = "image", nullable = false)
+    private String image;
+
+    @Column(name = "provider", nullable = false)
+    private String provider;
 
     @OneToMany(mappedBy = "user")
     private List<Favourites> favourites;
@@ -61,14 +61,6 @@ public class User extends AbstractTimestamp {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -76,14 +68,22 @@ public class User extends AbstractTimestamp {
     public void setPassword(String password) {
         this.password = password;
     }
-//
-//    public Boolean getAdmin() {
-//        return isAdmin;
-//    }
-//
-//    public void setAdmin(Boolean admin) {
-//        isAdmin = admin;
-//    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public List<Favourites> getFavourites() {
         return favourites;
@@ -111,10 +111,9 @@ public class User extends AbstractTimestamp {
 
     public User() {}
 
-    public User(String firstName, String lastName, String username, String password) {
+    public User(String firstName, String lastName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
         this.password = password;
 
         this.favourites = new LinkedList<Favourites>();
