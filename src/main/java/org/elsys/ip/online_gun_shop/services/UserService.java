@@ -4,19 +4,27 @@ import org.elsys.ip.online_gun_shop.exception.ResourceNotFoundException;
 import org.elsys.ip.online_gun_shop.model.Favourites;
 import org.elsys.ip.online_gun_shop.model.Reviews;
 import org.elsys.ip.online_gun_shop.model.User;
+import org.elsys.ip.online_gun_shop.repository.FavouritesRepository;
+import org.elsys.ip.online_gun_shop.repository.ReviewRepository;
 import org.elsys.ip.online_gun_shop.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final ReviewRepository reviewRepository;
+
+    private final FavouritesRepository favouritesRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository, ReviewRepository reviewRepository, FavouritesRepository favouritesRepository) {
         this.userRepository = userRepository;
+        this.reviewRepository = reviewRepository;
+        this.favouritesRepository = favouritesRepository;
     }
 
     public List<User> getAllUsers() {
@@ -42,11 +50,19 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
-    public List<Favourites> getAllFavourites(Integer id) {
-        return getUserById(id).getFavourites();
+    public List<Favourites> getUserFavourites(Integer userId) {
+        return favouritesRepository.findByUserId(userId);
     }
 
-    public List<Reviews> getAllReviews(Integer id) {
-        return getUserById(id).getReviews();
+    public List<Reviews> getUserReviews(Integer userId) {
+        return reviewRepository.findByUserId(userId);
+    }
+
+    public List<Favourites> deleteUserFavourites(Integer userId) {
+        return favouritesRepository.deleteByUserId(userId);
+    }
+
+    public List<Reviews> deleteUserReviews(Integer userId) {
+        return reviewRepository.deleteByUserId(userId);
     }
 }
