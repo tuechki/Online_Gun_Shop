@@ -10,4 +10,7 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Reviews, Integer> {
     public List<Reviews> findByWeaponId (Integer weaponId);
     public List<Reviews> deleteByWeaponId (Integer weaponId);
+
+    public List<Reviews> findByUserId (Integer userId);
+    public List<Reviews> deleteByUserId (Integer userId);
 }

@@ -79,7 +79,7 @@ public class WeaponService {
         return reviewRepository.findByWeaponId(weaponId);
     }
 
-    public List<Reviews> deleteAllReviews(Integer weaponId) {
+    public List<Reviews> deleteWeaponReviews(Integer weaponId) {
         return reviewRepository.deleteByWeaponId(weaponId);
     }
 
