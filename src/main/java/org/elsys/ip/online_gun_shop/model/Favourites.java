@@ -41,4 +41,7 @@ public class Favourites extends AbstractTimestamp {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+
+    public Favourites() {
+    }
 }

@@ -52,4 +52,6 @@ public class Reviews extends AbstractTimestamp {
     public void setText(String text) {
         this.text = text;
     }
+
+    public Reviews() {}
 }

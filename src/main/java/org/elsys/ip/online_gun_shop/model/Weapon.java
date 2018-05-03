@@ -181,4 +181,7 @@ public class Weapon extends AbstractTimestamp {
         this.reviews = new LinkedList<Reviews>();
         this.purchases = new LinkedList<Purchases>();
     }
+
+    public Weapon() {
+    }
 }
