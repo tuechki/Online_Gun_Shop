@@ -1,0 +1,18 @@
+<h2 i18n>Guns are everywhere, but the best are here.... </h2>
+
+
+<mat-card>
+  <mat-card-content>
+        <div class="col">
+          <span class="life-container" *ngFor="let weapon of weapons ">
+
+            <button class="block" mat-raised-button (click)="showWeapon(weapon)">
+                <img class="img" src='http://localhost:8080/images/businesses/{{weapon.id}}/image.png'/>
+                <p>{{weapon.name}}</p>
+            </button>
+
+          </span>
+        </div>
+
+  </mat-card-content>
+</mat-card>

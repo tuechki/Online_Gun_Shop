@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-content>
+    <h2 class="example-h2">{{weapon.name}}</h2>
+      <mat-tab i18n-label label="Weapon info">
+        <div class="demo-tab-content">
+          <img class="img" src='http://localhost:8080/images/weapons/{{weapon.id}}/image.png'/>
+          <br>
+          <br>
+          <p i18n> Description:</p><p>{{weapon.category}} </p>
+          <br>
+          <p i18n> Category: </p><p>{{weapon.category}} </p>
+          <p i18n> Brand: </p><p>{{weapon.brand}} </p>
+          <p i18n> Model: </p><p>{{weapon.model}} </p>
+          <p i18n> Caliber: </p><p>{{weapon.caliber}} </p>
+          <p i18n> Capacity: </p><p>{{weapon.capacity}} </p>
+          <p i18n> Price: </p><p>{{weapon.price}} </p>
+        </div>
+      </mat-tab>
+  </mat-card-content>
+</mat-card>
