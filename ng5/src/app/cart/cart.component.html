@@ -1,0 +1,16 @@
+
+<mat-card>
+  <mat-card-content>
+    <div class="col">
+          <span class="life-container" *ngFor="let weapon of weapons ">
+
+            <button class="block" mat-raised-button (click)="showWeapon(weapon)">
+                <img class="img" src='http://localhost:8080/images/cart/{{weapon.id}}/image.png'/>
+                <p>{{weapon.name}}</p>
+            </button>
+
+          </span>
+    </div>
+
+  </mat-card-content>
+</mat-card>
