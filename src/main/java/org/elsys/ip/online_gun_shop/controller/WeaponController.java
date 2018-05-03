@@ -54,17 +54,24 @@ public class WeaponController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/reviews", method = RequestMethod.GET)
+    @RequestMapping(value = "/{weaponId}/reviews", method = RequestMethod.GET)
     public ResponseEntity<List<Reviews>> getWeaponReviews(@PathVariable Integer weaponId) {
         List<Reviews> weaponReviews = weaponService.getWeaponReviews(weaponId);
 
         return new ResponseEntity<List<Reviews>>(weaponReviews, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/reviews", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{weaponId}/reviews", method = RequestMethod.DELETE)
     public ResponseEntity<List<Reviews>> deleteUserReviews(@PathVariable Integer weaponId) {
         List<Reviews> deletedReviews = weaponService.deleteWeaponReviews(weaponId);
 
         return new ResponseEntity<List<Reviews>>(deletedReviews, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{weaponId}/reviews", method = RequestMethod.POST)
+    public ResponseEntity<Reviews> createWeaponReview(@PathVariable Integer weaponId, @RequestBody Reviews reviews) {
+        Reviews weaponReview = weaponService.createWeaponReview(weaponId, reviews);
+
+        return new ResponseEntity<Reviews>(weaponReview, HttpStatus.OK);
     }
 }

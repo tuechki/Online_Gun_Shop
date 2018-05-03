@@ -1,5 +1,7 @@
 package org.elsys.ip.online_gun_shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,10 +14,12 @@ public class Reviews extends AbstractTimestamp {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "weapon_id")
+    @JsonIgnore
     private Weapon weapon;
 
     @Column(name = "text", nullable = false)

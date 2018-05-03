@@ -58,9 +58,9 @@ public class WeaponService {
 
         review.setWeapon(weapon);
 
-        review = reviewRepository.save(review);
-
         weapon.getReviews().add(review);
+
+        review = reviewRepository.save(review);
 
         weaponRepository.save(weapon);
 
