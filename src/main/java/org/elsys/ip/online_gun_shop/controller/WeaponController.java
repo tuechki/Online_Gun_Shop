@@ -23,15 +23,15 @@ public class WeaponController {
     }
 
     @GetMapping
-    public List<Weapon> getAllUsers() {
+    public List<Weapon> getAllWeapons() {
         return weaponService.getAllWeapons();
     }
 
     @PostMapping
-    public ResponseEntity<Weapon> createWeapon(@Valid @RequestBody Weapon weapon) {
-        Weapon createdWeapon = weaponService.createWeapon(weapon);
+    public ResponseEntity createWeapon(@RequestBody Weapon weapon) {
+        weaponService.createWeapon(weapon);
 
-        return new ResponseEntity<Weapon>(createdWeapon, HttpStatus.CREATED);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

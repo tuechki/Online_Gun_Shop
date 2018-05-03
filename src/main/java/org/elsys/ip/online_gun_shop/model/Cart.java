@@ -3,7 +3,7 @@ package org.elsys.ip.online_gun_shop.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "purchase_history")
+@Table(name = "cart")
 public class Cart {
     //Redundant class - see Purchases
 
